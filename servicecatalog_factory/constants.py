@@ -40,6 +40,7 @@ AWS_URLSUFFIX = os.environ.get(
 )
 
 RESULTS_DIRECTORY = "results"
+REPO_OWNER = os.environ.get("REPO_OWNER", "awslabs")
 
 PIPELINE_MODE_COMBINED = "combined"
 PIPELINE_MODE_SPILT = "split"
