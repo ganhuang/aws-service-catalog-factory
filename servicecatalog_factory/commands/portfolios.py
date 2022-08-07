@@ -800,9 +800,7 @@ def generate_launch_constraints(p):
                 logger.info(
                     f"Uploaded nested template to s3://{bucket_name}:{object_key}"
                 )
-                nested_template_url = (
-                    f"https://{bucket_name}.s3.{region}.{constants.AWS_URLSUFFIX}/{object_key}"
-                )
+                nested_template_url = f"https://{bucket_name}.s3.{region}.{constants.AWS_URLSUFFIX}/{object_key}"
                 parent_template_context.append(
                     {
                         "uid": f"{region}{portfolio_id}".replace("-", ""),
