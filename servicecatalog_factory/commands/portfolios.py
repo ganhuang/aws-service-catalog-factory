@@ -801,7 +801,7 @@ def generate_launch_constraints(p):
                     f"Uploaded nested template to s3://{bucket_name}:{object_key}"
                 )
                 nested_template_url = (
-                    f"https://{bucket_name}.s3.{region}.amazonaws.com/{object_key}"
+                    f"https://{bucket_name}.s3.{region}.{constants.AWS_URLSUFFIX}/{object_key}"
                 )
                 parent_template_context.append(
                     {
@@ -1063,7 +1063,7 @@ def import_product_set(f, name, portfolio_name):
                     "git clone "
                     "--config 'credential.helper=!aws codecommit credential-helper $@' "
                     "--config 'credential.UseHttpPath=true' "
-                    f"https://git-codecommit.{constants.HOME_REGION}.amazonaws.com/v1/repos/{repository_name}"
+                    f"https://git-codecommit.{constants.HOME_REGION}.{constants.AWS_URLSUFFIX}/v1/repos/{repository_name}"
                 )
                 os.system(command)
                 remote_name = repository_name.replace(f"{name}-", "")

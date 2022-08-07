@@ -202,6 +202,12 @@ Resources:
           - Name: ACCOUNT_ID
             Type: PLAINTEXT
             Value: !Sub "${AWS::AccountId}"
+          - Name: PARTITION
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::Partition}"
+          - Name: AWS_URLSUFFIX
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::URLSuffix}"
       Source:
         Type: CODEPIPELINE
         BuildSpec: |

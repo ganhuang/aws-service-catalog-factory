@@ -119,6 +119,8 @@ Parameters:
     Description: "Do not change this unless told to do so"
     Default: aws-service-catalog-factory
 
+Conditions:
+  AWSChinaPartition: !Equals [!Ref AWS::Partition, 'aws-cn']
 
 Resources:
   InitialiserVersionParam:
@@ -372,10 +374,13 @@ Resources:
 
 Outputs:
   ServiceCatalogFactoryRepoConsoleURL:
-    Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/codesuite/codecommit/repositories/ServiceCatalogFactory/browse"
+    Value: !If
+      - AWSChinaPartition
+      - !Sub "https://${AWS::Region}.console.amazonaws.cn/codesuite/codecommit/repositories/ServiceCatalogFactory/browse"
+      - !Sub "https://${AWS::Region}.console.aws.amazon.com/codesuite/codecommit/repositories/ServiceCatalogFactory/browse"
   ServiceCatalogFactoryRepoCloneURLSSH:
-    Value: !Sub "ssh://git-codecommit.${AWS::Region}.amazonaws.com/v1/repos/ServiceCatalogFactory"
+    Value: !Sub "ssh://git-codecommit.${AWS::Region}.${AWS::URLSuffix}/v1/repos/ServiceCatalogFactory"
   ServiceCatalogFactoryRepoCloneURLHTTPS:
-    Value: !Sub "https://git-codecommit.${AWS::Region}.amazonaws.com/v1/repos/ServiceCatalogFactory"
+    Value: !Sub "https://git-codecommit.${AWS::Region}.${AWS::URLSuffix}/v1/repos/ServiceCatalogFactory"
   InitialiserVersion:
     Value: !GetAtt InitialiserVersionParam.Value

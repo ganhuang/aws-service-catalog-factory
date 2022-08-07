@@ -121,6 +121,9 @@ Resources:
           - Name: REGION
             Type: PLAINTEXT
             Value: !Sub "${AWS::Region}"
+          - Name: AWS_URLSUFFIX
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::URLSuffix}"
       Source:
         Type: CODEPIPELINE
         BuildSpec: |
@@ -170,6 +173,9 @@ Resources:
           - Name: REGION
             Type: PLAINTEXT
             Value: !Sub "${AWS::Region}"
+          - Name: AWS_URLSUFFIX
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::URLSuffix}"
       Source:
         Type: CODEPIPELINE
         BuildSpec: |
@@ -213,6 +219,15 @@ Resources:
           - Name: PARTITION
             Type: PLAINTEXT
             Value: !Ref AWS::Partition
+          - Name: ACCOUNT_ID
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::AccountId}"
+          - Name: REGION
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::Region}"
+          - Name: AWS_URLSUFFIX
+            Type: PLAINTEXT
+            Value: !Sub "${AWS::URLSuffix}"
       Source:
         Type: CODEPIPELINE
         BuildSpec: |
@@ -390,9 +405,9 @@ Resources:
               OutputArtifacts:
                 - Name: Source
               RunOrder: '1'
-            
+
             {% elif Source.Provider.lower() == 'custom' %}
-              
+
             - Name: Source
               ActionTypeId:
                 Category: Source
@@ -514,7 +529,7 @@ Resources:
         AllowedIPRange: {{ Source['Configuration']['GitWebHookIpAddress'] }}
       Filters:
         - JsonPath: '$.changes[0].ref.id'
-          MatchEquals: 'refs/heads/{Branch}'     
+          MatchEquals: 'refs/heads/{Branch}'
       TargetPipeline: !Ref Pipeline
       TargetPipelineVersion: !GetAtt Pipeline.Version
       TargetAction: Source

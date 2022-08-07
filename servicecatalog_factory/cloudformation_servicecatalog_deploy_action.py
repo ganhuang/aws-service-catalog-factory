@@ -109,7 +109,7 @@ def create_or_update_provisioning_artifact(
     product = action_configuration.get("NAME")
 
     bucket = action_configuration.get("BUCKET")
-    template_url = f"https://{bucket}.s3.{pipeline_region}.amazonaws.com/{action_configuration.get('TEMPLATE_URL')}"
+    template_url = f"https://{bucket}.s3.{pipeline_region}.{os.environ.get('AWS_URLSUFFIX')}/{action_configuration.get('TEMPLATE_URL')}"
 
     with betterboto_client.ClientContextManager(
         "servicecatalog", region_name=region

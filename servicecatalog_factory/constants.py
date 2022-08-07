@@ -35,6 +35,9 @@ ASSOCIATIONS = "associations.j2"
 HOME_REGION = os.environ.get(
     "AWS_REGION", os.environ.get("AWS_DEFAULT_REGION", "eu-west-1")
 )
+AWS_URLSUFFIX = os.environ.get(
+    "AWS_URLSUFFIX", os.environ.get("AWS_DEFAULT_URLSUFFIX", "amazonaws.com")
+)
 
 RESULTS_DIRECTORY = "results"
 

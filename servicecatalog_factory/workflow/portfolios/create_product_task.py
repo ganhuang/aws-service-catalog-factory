@@ -91,11 +91,12 @@ class CreateProductTask(FactoryTask):
                         "Type": "CLOUD_FORMATION_TEMPLATE",
                         "Description": "Placeholder version, do not provision",
                         "Info": {
-                            "LoadTemplateFromURL": "https://{}.s3.{}.amazonaws.com/{}".format(
+                            "LoadTemplateFromURL": "https://{}.s3.{}.{}/{}".format(
                                 self.load_from_input("s3_bucket_url").get(
                                     "s3_bucket_url"
                                 ),
                                 constants.HOME_REGION,
+                                constants.AWS_URLSUFFIX,
                                 "empty.template.yaml",
                             )
                         },
